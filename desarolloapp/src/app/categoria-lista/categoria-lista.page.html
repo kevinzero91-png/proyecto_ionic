@@ -1,0 +1,29 @@
+<app-toolbar nombre="Categorías"></app-toolbar>
+
+<ion-content [fullscreen]="true">
+<ion-list>
+    <ion-item button *ngFor="let categoria of categorias">
+    <ion-avatar slot="start">
+        <img src="https://imgs.search.brave.com/3Jhsahf2HyAWxza0qgVzE-Ct5vzuYoZarE1iCeKplFo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzc3L2I4/LzUyLzc3Yjg1MjBk/ZDBhZDgyYjRkMzQ1/M2FiMmNiZDA3OTM5/LmpwZw" alt="Foto">
+    </ion-avatar>
+    <ion-label class="ion-text-wrap">
+        <h3>{{categoria.nombre}}</h3>
+        <p>{{categoria.descripcion}}</p>
+    </ion-label>
+    <ion-button [routerLink]="['/categoria-detalle', categoria.id_categoria]"color="verde">
+  <ion-icon name="person-circle"></ion-icon>
+</ion-button>
+<ion-button (click)="editar(categoria.id_categoria)" color="warning">
+  <ion-icon name="pencil"></ion-icon>
+</ion-button>
+<ion-button (click)="alertEliminar(categoria.id_categoria)" color="danger">
+  <ion-icon name="trash"></ion-icon>
+</ion-button>
+    </ion-item>
+</ion-list>
+</ion-content>
+<ion-fab slot="fixed" vertical="bottom" horizontal="center">
+    <ion-fab-button (click)="new()">
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>categoriaDetalle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="categoria as categoria">
+  <div class="center">
+    <img src="https://imgs.search.brave.com/3Jhsahf2HyAWxza0qgVzE-Ct5vzuYoZarE1iCeKplFo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzc3L2I4/LzUyLzc3Yjg1MjBk/ZDBhZDgyYjRkMzQ1/M2FiMmNiZDA3OTM5/LmpwZw" alt="Foto">
+  </div>
+  <ion-card-header class="center">
+    <ion-card-title>
+      <h3>{{ categoria.nombre }}</h3>
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <p>Nombre</p>
+          <h2>{{ categoria.nombre }}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+</ion-content>

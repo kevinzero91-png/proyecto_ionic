@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Betania Patmos';
+    src: url("../assets/fonts/fuente.ttf"); //change url accordingly
+}
+
+:root {
+    --ion-font-family: 'Betania Patmos';
+}
+.ion-color-verde {
+   --ion-color-base: #00ebe7;
+	--ion-color-base-rgb: 0,235,231;
+	--ion-color-contrast: #000000;
+	--ion-color-contrast-rgb: 0,0,0;
+	--ion-color-shade: #00cfcb;
+	--ion-color-tint: #1aede9;
+}

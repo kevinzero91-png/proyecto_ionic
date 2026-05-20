@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar color="personalizado">
+        <ion-title class="ion-text-center">Nueva Categoria</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="categoria" (ngSubmit)="guardarDatos()">
+        <ion-grid>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item>
+                        <ion-label position="floating" color="primary">Nombre</ion-label>
+                        <ion-input type="text" formControlName="nombre" class="form-control"></ion-input>
+                    </ion-item>
+                    <div id="note" *ngFor="let validation of mensajes_validacion.nombre">
+                        <ion-note color="danger" *ngIf="getError('nombre')[(validation.type)]">
+                            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                        </ion-note>
+                    </div>
+                </ion-col>
+                    
+                <ion-col size="12">
+                    <p class="ion-text-center">
+                        <ion-button type="submit" [disabled]="!categoria.valid">Guardar</ion-button>
+                    </p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+</ion-content>
