@@ -1,0 +1,104 @@
+/* Fondo gris claro */
+.form-content {
+  --background: #f4f5f8;
+}
+
+.form-header {
+  margin-bottom: 20px;
+  padding-left: 5px;
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #222428;
+    margin: 0 0 5px 0;
+  }
+  
+  p {
+    font-size: 0.95rem;
+    color: #666666;
+    margin: 0;
+  }
+}
+
+/* Tarjeta contenedora */
+.form-card {
+  margin: 0;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  background: #ffffff;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+/* Estilos de Etiquetas y Required */
+.custom-label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 0.9rem;
+  
+  .required {
+    color: var(--ion-color-danger);
+  }
+}
+
+/* Inputs de texto limpios */
+.custom-input {
+  --background: #f9f9fb;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --padding-top: 15px;
+  --padding-bottom: 15px;
+  --border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  
+  &.ion-focused {
+    border-color: var(--ion-color-tertiary);
+    --background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(125, 179, 179, 0.2);
+  }
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+  color: var(--ion-color-danger);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+  padding-left: 5px;
+
+  ion-icon {
+    margin-right: 5px;
+    font-size: 1rem;
+  }
+}
+
+/* Botón de acción destacado */
+.action-container {
+  margin-top: 30px;
+  margin-bottom: 5px;
+  
+  .submit-btn {
+    --border-radius: 12px;
+    --box-shadow: 0 4px 10px rgba(125, 179, 179, 0.4);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    height: 55px;
+
+    /* Estilo sutil cuando el botón está deshabilitado */
+    &::part(native) {
+      transition: all 0.3s ease;
+    }
+    
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+}

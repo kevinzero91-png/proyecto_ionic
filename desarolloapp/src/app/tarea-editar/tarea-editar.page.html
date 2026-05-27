@@ -1,0 +1,56 @@
+<ion-content class="ion-padding">
+  <form [formGroup]="tareaForm" (ngSubmit)="actualizarTarea()">
+    
+    <ion-card style="margin: 0 0 20px 0;">
+      <ion-card-content>
+        <ion-item lines="full">
+          <ion-label position="stacked">Título de la Tarea</ion-label>
+          <ion-input formControlName="nombre" type="text" required></ion-input>
+        </ion-item>
+        
+        <ion-item lines="none">
+          <ion-label position="stacked">Estatus</ion-label>
+          <ion-select formControlName="estado" interface="popover">
+            <ion-select-option value="1">Pendiente</ion-select-option>
+            <ion-select-option value="2">En progreso</ion-select-option>
+            <ion-select-option value="3">Completada</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Asignado a:</ion-label>
+          <ion-select formControlName="id_usuario" interface="popover" placeholder="Selecciona un responsable">
+            <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.id_usuario">
+              {{ usuario.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Categoría:</ion-label>
+          <ion-select formControlName="id_categoria" interface="popover" placeholder="Selecciona una categoría">
+            <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id_categoria">
+              {{ categoria.nombre }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label position="stacked">Prioridad:</ion-label>
+          <ion-select formControlName="id_prioridad" interface="popover" placeholder="Nivel de prioridad">
+            <ion-select-option *ngFor="let prioridad of prioridads" [value]="prioridad.id_prioridad">
+              {{ prioridad.nivel }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="block" type="submit" color="warning" [disabled]="tareaForm.invalid" class="ion-margin-top">
+      <ion-icon slot="start" name="sync-outline"></ion-icon>
+      ACTUALIZAR TAREA
+    </ion-button>
+
+  </form>
+</ion-content>

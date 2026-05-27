@@ -1,0 +1,78 @@
+/* Fondo general */
+.category-content {
+  --background: #f4f5f8;
+}
+
+.category-list {
+  background: transparent;
+  padding: 0;
+}
+
+/* Transformar el elemento deslizable en tarjeta */
+.category-sliding-item {
+  margin-bottom: 12px;
+  background: transparent;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.category-item {
+  --background: #ffffff;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  border-radius: 12px;
+}
+
+/* Ícono de etiqueta (Tag) */
+.icon-wrapper {
+  background: rgba(125, 179, 179, 0.15);
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+
+  ion-icon {
+    font-size: 1.4rem;
+  }
+}
+
+/* Tipografía */
+.category-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #222428;
+  margin-bottom: 4px;
+}
+
+.category-description {
+  font-size: 0.85rem;
+  color: #737373;
+}
+
+/* Mensaje cuando no hay registros */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: #888;
+
+  ion-icon {
+    font-size: 4rem;
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #555;
+    margin: 0 0 10px 0;
+  }
+}

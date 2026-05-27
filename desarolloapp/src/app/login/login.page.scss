@@ -1,0 +1,147 @@
+// Variables de diseño corporativo
+$primary-color: #3b82f6; // Azul productivo
+$text-dark: #1f2937;
+$text-muted: #6b7280;
+$bg-color: #f3f4f6;
+
+.login-content {
+  --background: #{$bg-color};
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+}
+
+// Cabecera de la Marca (Logo y Título)
+.brand-header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  .logo-wrapper {
+    width: 70px;
+    height: 70px;
+    background: $primary-color;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+
+    .brand-logo {
+      font-size: 40px;
+      color: #ffffff;
+    }
+  }
+
+  h1 {
+    color: $text-dark;
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -0.5px;
+
+    span {
+      color: $primary-color;
+      font-weight: 400;
+    }
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 14px;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+}
+
+// Tarjeta blanca con sombra suave
+.modern-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 400px;
+  margin: 0;
+  padding: 10px 0;
+}
+
+// Campos de entrada
+.input-group {
+  margin-bottom: 20px;
+
+  ion-label {
+    color: $text-dark !important;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .clean-input {
+    --background: #f9fafb;
+    --padding-start: 15px;
+    --color: #111827;
+    --placeholder-color: #9ca3af;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s ease-in-out;
+
+    &:focus-within {
+      border-color: $primary-color;
+      --background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+  }
+}
+
+// Botón de Iniciar Sesión
+.primary-btn {
+  margin-top: 30px;
+  --background: #{$primary-color};
+  --background-hover: #2563eb;
+  --box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  --border-radius: 8px;
+  height: 48px;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: none; // Quita el mayúsculas por defecto de Ionic
+
+  &[disabled] {
+    --background: #d1d5db;
+    --color: #9ca3af;
+    --box-shadow: none;
+  }
+}
+
+// Enlaces de texto inferiores
+.toggle-section {
+  text-align: center;
+  margin-top: 25px;
+
+  a {
+    color: $primary-color;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+}

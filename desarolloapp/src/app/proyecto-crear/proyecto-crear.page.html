@@ -1,0 +1,107 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/proyecto-lista"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ esEdicion ? 'Editar Proyecto' : 'Nuevo Proyecto' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding form-content">
+  
+  <div class="form-header">
+    <h2>Detalles del Proyecto</h2>
+    <p>Ingresa la información clave para comenzar a organizar tus tareas.</p>
+  </div>
+
+  <ion-card class="form-card">
+    <ion-card-content>
+      
+      <div class="input-group">
+        <ion-label position="stacked" class="custom-label">Nombre del Proyecto <span class="required">*</span></ion-label>
+        <ion-input 
+          [(ngModel)]="proyecto.nombre" 
+          placeholder="Ej. Rediseño de Sitio Web" 
+          clearInput="true"
+          class="custom-input">
+        </ion-input>
+      </div>
+
+      <div class="input-group">
+        <ion-label position="stacked" class="custom-label">Descripción general</ion-label>
+        <ion-textarea 
+          [(ngModel)]="proyecto.descripcion" 
+          placeholder="Describe brevemente el objetivo principal de este proyecto..." 
+          [autoGrow]="true"
+          rows="4"
+          class="custom-textarea">
+        </ion-textarea>
+      </div>
+
+      <div class="input-group" style="margin-top: 15px;">
+        <ion-label position="stacked" class="custom-label">Estado del Proyecto</ion-label>
+        <ion-select 
+          [(ngModel)]="proyecto.estado" 
+          interface="popover"
+          class="custom-input">
+          <ion-select-option value="Planificado">Planificado</ion-select-option>
+          <ion-select-option value="En Curso">En Curso</ion-select-option>
+          <ion-select-option value="Pausado">Pausado</ion-select-option>
+          <ion-select-option value="Terminado">Terminado</ion-select-option>
+        </ion-select>
+      </div>
+
+      <ion-row class="ion-no-padding" style="margin-top: 15px;">
+        <ion-col size="6" style="padding-left: 0;">
+          <div class="input-group">
+            <ion-label position="stacked" class="custom-label">Fecha Inicio</ion-label>
+            <ion-input 
+              type="date" 
+              [(ngModel)]="proyecto.inicio" 
+              class="custom-input">
+            </ion-input>
+          </div>
+        </ion-col>
+        
+        <ion-col size="6" style="padding-right: 0;">
+          <div class="input-group">
+            <ion-label position="stacked" class="custom-label">Fecha Fin</ion-label>
+            <ion-input 
+              type="date" 
+              [(ngModel)]="proyecto.fin" 
+              class="custom-input">
+            </ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div class="input-group" style="margin-top: 15px;">
+        <ion-label position="stacked" class="custom-label">Asignar Equipo <span class="required">*</span></ion-label>
+        
+        <ion-select 
+          [(ngModel)]="proyecto.miembros" 
+          multiple="true" 
+          [compareWith]="compararUsuarios"
+          cancelText="Cancelar" 
+          okText="Confirmar"
+          placeholder="Selecciona a los responsables"
+          class="custom-input">
+          
+          <ion-select-option *ngFor="let usuario of listaUsuarios" [value]="usuario.id_usuario">
+            {{ usuario.nombre }}
+          </ion-select-option>
+          
+        </ion-select>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <div class="action-container">
+    <ion-button expand="block" size="large" color="tertiary" class="submit-btn" (click)="guardarProyecto()">
+      <ion-icon slot="start" [name]="esEdicion ? 'save-outline' : 'checkmark-circle-outline'"></ion-icon>
+      {{ esEdicion ? 'Actualizar Proyecto' : 'Crear Proyecto' }}
+    </ion-button>
+  </div>
+
+</ion-content>

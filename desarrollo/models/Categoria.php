@@ -1,59 +1,21 @@
 <?php
-
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
-/**
- * This is the model class for table "categoria".
- *
- * @property int $id_categoria
- * @property string $nombre
- *
- * @property Tarea[] $tareas
- */
-class Categoria extends \yii\db\ActiveRecord
+class Categoria extends ActiveRecord
 {
-
-
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'categoria';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    // AÑADE ESTO: Esto le dice a Yii2 que el campo 'nombre' es seguro y obligatorio
     public function rules()
     {
         return [
             [['nombre'], 'required'],
-            [['nombre'], 'string', 'max' => 25],
+            [['nombre'], 'string', 'max' => 255],
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id_categoria' => 'Id Categoria',
-            'nombre' => 'Nombre',
-        ];
-    }
-
-    /**
-     * Gets query for [[Tareas]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTareas()
-    {
-        return $this->hasMany(Tarea::class, ['id_categoria' => 'id_categoria']);
-    }
-
 }

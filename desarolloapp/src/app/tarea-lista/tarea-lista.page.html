@@ -1,0 +1,78 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title>Tareas</ion-title>
+    
+    <ion-searchbar 
+      slot="end" 
+      placeholder="Buscar..." 
+      animated="true"
+      style="max-width: 220px; --background: rgba(255,255,255,0.15); --color: white; --placeholder-color: #ddd; --icon-color: white;">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding tasks-content">
+
+  <ion-list class="tasks-list">
+    
+    <ion-item-sliding *ngFor="let tarea of tareas" class="task-sliding-item">
+      
+      <ion-item lines="none" class="task-item">
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-align-items-center">
+            
+            <ion-col size="6">
+              <ion-label>
+                <h2 class="task-title">{{ tarea.titulo }}</h2>
+                <p class="task-subtitle">
+                  <span class="category-text" *ngIf="tarea.id_categoria">{{ obtenerNombreCategoria(tarea.id_categoria) }}</span>
+                  <span class="user-text" *ngIf="tarea.id_usuario"> • {{ obtenerNombreUsuario(tarea.id_usuario) }}</span>
+                </p>
+              </ion-label>
+            </ion-col>
+            
+            <ion-col size="4" class="ion-text-center badges-col">
+              <ion-badge [color]="obtenerColorEstado(tarea.id_estado)" class="task-badge">
+                {{ obtenerNombreEstado(tarea.id_estado) }}
+              </ion-badge>
+              
+              <ion-badge *ngIf="tarea.id_prioridad" [color]="obtenerColorPrioridad(tarea.id_prioridad)" class="priority-badge">
+                {{ obtenerNombrePrioridad(tarea.id_prioridad) }}
+              </ion-badge>
+            </ion-col>
+            
+            <ion-col size="2" class="avatar-col">
+              <ion-avatar class="task-avatar">
+                <span>{{ obtenerNombreUsuario(tarea.id_usuario) | slice:0:1 }}</span>
+              </ion-avatar>
+            </ion-col>
+            
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item-options slot="end">
+        <ion-item-option color="warning" (click)="editarTarea(tarea)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="confirmarEliminar(tarea)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="irACrearTarea()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

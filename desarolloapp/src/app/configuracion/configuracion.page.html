@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="config-content" color="dark">
+  <div class="config-container">
+
+    <h2 style="color: white; margin-left: 10px; font-size: 1.2em;">Ajustes del Gestor</h2>
+
+    <ion-card class="modern-card">
+      <ion-card-content class="no-padding-bottom">
+        <ion-list lines="full" class="transparent-list">
+          
+          <ion-item color="transparent">
+            <ion-icon name="notifications-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>Notificaciones Push</ion-label>
+            <ion-toggle [checked]="true" slot="end" color="primary"></ion-toggle>
+          </ion-item>
+
+          <ion-item color="transparent">
+            <ion-icon name="moon-outline" slot="start" color="tertiary"></ion-icon>
+            <ion-label>Modo Oscuro</ion-label>
+            <ion-toggle [checked]="true" slot="end" color="tertiary"></ion-toggle>
+          </ion-item>
+
+          <ion-item color="transparent">
+            <ion-icon name="cloud-done-outline" slot="start" color="success"></ion-icon>
+            <ion-label>Sincronización Automática</ion-label>
+            <ion-toggle [checked]="true" slot="end" color="success"></ion-toggle>
+          </ion-item>
+
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

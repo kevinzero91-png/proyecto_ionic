@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mis Proyectos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding projects-content">
+
+  <div class="empty-state" *ngIf="proyectos.length === 0">
+    <ion-icon name="folder-open-outline"></ion-icon>
+    <h3>No hay proyectos</h3>
+    <p>Agrega un proyecto a tu base de datos para comenzar.</p>
+  </div>
+
+  <ion-list class="projects-list" *ngIf="proyectos.length > 0">
+    <ion-item-sliding *ngFor="let proyecto of proyectos" class="project-sliding-item">
+      
+      <ion-item lines="none" class="project-item" button (click)="verDetalle(proyecto.id_proyecto)">
+        <ion-grid class="ion-no-padding" style="width: 100%;">
+          <ion-row>
+            <ion-col size="11">
+              <h2 class="project-title">{{ proyecto.nombre }}</h2>
+              <p class="project-subtitle">{{ proyecto.descripcion }}</p>
+            </ion-col>
+            <ion-col size="1" class="ion-text-end">
+              <ion-icon name="briefcase-outline" color="tertiary"></ion-icon>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="progress-row">
+            <ion-col size="12">
+              <div class="progress-header">
+                <span class="progress-label">PROGRESO ({{ proyecto.totalTareas }} TAREAS)</span>
+                <span class="progress-percentage">{{ proyecto.progresoTexto }}</span>
+              </div>
+              <ion-progress-bar color="tertiary" [value]="proyecto.progresoValor"></ion-progress-bar>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="warning" (click)="editarProyecto(proyecto)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="confirmarEliminar(proyecto)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="irACrear()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

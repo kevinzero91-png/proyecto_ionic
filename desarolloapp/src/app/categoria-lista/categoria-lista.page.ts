@@ -19,21 +19,27 @@ export class CategoriaListaPage implements OnInit {
     private alertCtrl: AlertController,
     private router: Router) { }
 
- ngOnInit() {
+  ngOnInit() {
     this.cargarcategorias();
-}
-async cargarcategorias(event?: InfiniteScrollCustomEvent) {
+  }
+
+  async cargarcategorias(event?: InfiniteScrollCustomEvent) {
     const loading = await this.loadingCtrl.create({
         message: 'Cargando',
         spinner: 'bubbles',
     });
     await loading.present();
+
+    // 1. Extraemos el token real de la memoria del dispositivo
+    const tokenReal = localStorage.getItem('auth_token');
+
     const response = await axios({
         method: 'get',
         url: this.baseUrl,
         withCredentials: true,
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${tokenReal}` // <-- Token inyectado dinámicamente
         }
     }).then((response) => {
         this.categorias = response.data;
@@ -42,8 +48,9 @@ async cargarcategorias(event?: InfiniteScrollCustomEvent) {
         console.log(error);     
     });
     loading.dismiss();
-}
-async new() {
+  }
+
+  async new() {
     const paginaModal = await this.modalCtrl.create({
         component: CategoriaCrearPage,
         breakpoints : [0, 0.3, 0.5, 0.95],
@@ -53,8 +60,9 @@ async new() {
     paginaModal.onDidDismiss().then((data) => {
         this.cargarcategorias();
     });
-}
-async editar(id_categoria: number) {
+  }
+
+  async editar(id_categoria: number) {
     const paginaModal = await this.modalCtrl.create({
       component: CategoriaCrearPage,
       componentProps: {
@@ -67,73 +75,64 @@ async editar(id_categoria: number) {
     paginaModal.onDidDismiss().then((data) => {
         this.cargarcategorias();
     });
-}
-async alertEliminar(id_categoria: number, nombre : string = "") {
+  }
+
+  // 1. Esta función SOLO pregunta si estás seguro
+  async alertEliminar(id_categoria: number, nombre: string = "") {
     const alert = await this.alertCtrl.create({
-      header: 'Categoria',
-      subHeader: 'Eliminar',
-      message: '¿Estás seguro de eliminar la categoria ' + id_categoria + '?',
-      cssClass: 'alert-center',
+      header: 'Eliminar Categoría',
+      message: `¿Estás seguro de eliminar "${nombre}"?`,
       buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Confirmar',
-          role: 'confirm',
-          handler: () => {
-            this.eliminar(id_categoria);
-          }
+        { text: 'Cancelar', role: 'cancel' },
+        { 
+          text: 'Confirmar', 
+          role: 'confirm', 
+          handler: () => { this.eliminar(id_categoria); } 
         }
       ]
     });
     await alert.present();
-}
+  }
 
-async eliminar(id_categoria: number) {
-    const response = await axios({
-      method: 'delete',
-      url: this.baseUrl + '/' + id_categoria,
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer 100-token'
-      }
-    }).then((response) => {
-      if (response?.status == 204) {
-        this.alertEliminado(id_categoria, 'La categoria con id ' + id_categoria + ' ha sido eliminada');
-      }
-    }).catch(function (error) {
-      console.log(error);
-    });
-}
-async alertEliminado(id_categoria: number, msg = "") {
+  // 2. Esta función SOLO elimina y muestra el resultado final
+  async eliminar(id_categoria: number) {
+    // 2. Extraemos el token real para autorizar la eliminación
+    const tokenReal = localStorage.getItem('auth_token');
+
+    try {
+        const response = await axios({
+            method: 'delete',
+            url: `${this.baseUrl}/${id_categoria}`,
+            withCredentials: true,
+            headers: { 
+                'Authorization': `Bearer ${tokenReal}` // <-- Token inyectado dinámicamente
+            }
+        });
+
+        if (response?.status === 204) {
+            this.alertResultado('Éxito', 'La categoría ha sido eliminada.');
+        }
+    } catch (error: any) {
+        let mensaje = 'Error al eliminar.';
+        if (error.response?.status === 404) {
+            mensaje = 'Error: Esta categoría ya no existe (404).';
+        } else if (error.response?.status === 401) {
+            mensaje = 'Acceso Denegado: Tu sesión ha expirado o no tienes permisos.';
+        }
+        this.alertResultado('Error', mensaje);
+    }
+  }
+
+  // 3. Esta función muestra el resultado (Éxito o Error)
+  async alertResultado(titulo: string, mensaje: string) {
     const alert = await this.alertCtrl.create({
-      header: 'Categoria',
-      subHeader: 'Eliminado',
-      message: msg,
-      cssClass: 'alert-center',
-      buttons: [
-        {
-          text: 'Continuar',
-          role: 'cancel',
-        },
-        {
-          text: 'Salir',
-          role: 'confirm',
-          handler: () => {
-            this.regresar();
-          },
-        },
-      ],
+      header: titulo,
+      message: mensaje,
+      buttons: [{
+          text: 'OK',
+          handler: () => { this.cargarcategorias(); }
+      }]
     });
-
     await alert.present();
-}
-private regresar() {
-    this.router.navigate(['categoria-lista']).then(() => {
-      window.location.reload();
-    });
-}
+  }
 }

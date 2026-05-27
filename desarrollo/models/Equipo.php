@@ -2,8 +2,11 @@
 
 namespace app\models;
 
-use Yii;
+namespace app\models;
 
+use Yii;
+use app\models\Proyecto; // <--- AGREGA ESTO
+use app\models\Usuario;  // <--- AGREGA ESTO
 /**
  * This is the model class for table "equipo".
  *

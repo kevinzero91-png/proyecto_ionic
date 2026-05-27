@@ -1,0 +1,89 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/proyecto-lista"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle del Proyecto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding detail-content">
+  <div *ngIf="proyecto" class="detail-container">
+    
+    <ion-card class="custom-card">
+      <ion-card-header>
+        <div class="status-badge" [ngClass]="{
+            'bg-planificado': proyecto.estado === 'Planificado',
+            'bg-en-curso': proyecto.estado === 'En Curso',
+            'bg-pausado': proyecto.estado === 'Pausado',
+            'bg-terminado': proyecto.estado === 'Terminado'
+          }">
+          <ion-icon name="ellipse"></ion-icon>
+          {{ proyecto.estado || 'Planificado' }}
+        </div>
+        <ion-card-title class="project-title">{{ proyecto.nombre }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p class="project-description">
+          {{ proyecto.descripcion || 'Sin descripción detallada.' }}
+        </p>
+        
+        <div class="dates-container">
+          <ion-item lines="none" class="date-item" *ngIf="proyecto.inicio">
+            <ion-icon name="calendar-clear-outline" slot="start" color="tertiary"></ion-icon>
+            <ion-label>
+              <h3>Fecha de Inicio</h3>
+              <p>{{ proyecto.inicio | date:'longDate' }}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none" class="date-item" *ngIf="proyecto.fin">
+            <ion-icon name="flag-outline" slot="start" color="tertiary"></ion-icon>
+            <ion-label>
+              <h3>Fecha de Finalización</h3>
+              <p>{{ proyecto.fin | date:'longDate' }}</p>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="section-title" style="margin-top: 25px;">
+      <h3>Equipo de Trabajo</h3>
+    </div>
+    
+    <ion-card class="custom-card">
+      <ion-list lines="none" style="background: transparent;">
+        
+        <ion-item *ngFor="let miembro of miembrosEquipo" color="transparent">
+          <ion-avatar slot="start" style="border: 2px solid var(--ion-color-tertiary);">
+            <img [src]="miembro.foto_perfil ? miembro.foto_perfil : 'assets/icon/favicon.png'" alt="Avatar">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ miembro.nombre }}</h2>
+            <p>{{ miembro.rol }}</p>
+          </ion-label>
+        </ion-item>
+
+      </ion-list>
+    </ion-card>
+
+    <div class="section-title" style="margin-top: 25px;">
+      <h3>Módulos Vinculados</h3>
+    </div>
+    
+    <ion-card class="module-card" [routerLink]="['/tarea-lista', proyecto?.id_proyecto]">
+      <ion-item lines="none" button detail="true">
+        <div class="icon-wrapper" slot="start">
+          <ion-icon name="checkmark-done-circle" color="tertiary"></ion-icon>
+        </div>
+        <ion-label>
+          <h2>Tareas del Proyecto</h2>
+          <p>Gestionar actividades y progreso</p>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+
+  </div>
+</ion-content>

@@ -1,0 +1,132 @@
+/* Fondo general */
+.dashboard-content {
+  --background: #f4f5f8;
+}
+
+/* Tipografía de la bienvenida */
+.welcome-section {
+  margin-bottom: 20px;
+  padding-top: 10px;
+
+  .greeting {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #222428;
+    margin: 0 0 5px 0;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    color: #666666;
+    margin: 0;
+  }
+}
+
+/* Diseño base para las tarjetas de métricas */
+.metric-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin: 5px;
+  text-align: center;
+  
+  .metric-number {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 10px 0 0 0;
+  }
+
+  .metric-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 5px 0 0 0;
+    opacity: 0.9;
+  }
+
+  .icon-container ion-icon {
+    font-size: 2rem;
+    padding: 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Colores personalizados para cada tarjeta */
+.card-primary {
+  background: linear-gradient(135deg, #7db3b3 0%, #5a8a8a 100%);
+  color: white;
+}
+
+.card-warning {
+  background: linear-gradient(135deg, #ffc409 0%, #d8a504 100%);
+  color: white;
+}
+
+.card-success {
+  background: linear-gradient(135deg, #2dd36f 0%, #1a9e50 100%);
+  color: white;
+}
+
+/* Ajustes para la tarjeta horizontal (Completadas) */
+.horizontal-card {
+  text-align: left;
+  margin-top: 10px;
+
+  .flex-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .icon-container-large ion-icon {
+    font-size: 3rem;
+    opacity: 0.9;
+  }
+
+  .text-container {
+    .metric-number { margin: 0; }
+    .metric-label { font-size: 0.9rem; }
+  }
+}
+
+/* Sección de actividad reciente */
+.section-title {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #444;
+  }
+}
+
+.recent-list {
+  background: transparent;
+  padding: 0;
+}
+
+.recent-item {
+  --background: #ffffff;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  
+  // Fuerza el texto a ser oscuro para que sea legible siempre
+  h2 { 
+    font-weight: 600; 
+    font-size: 1rem; 
+    color: #222428 !important; // Color oscuro fijo
+    margin: 0;
+  } 
+  
+  p { 
+    font-size: 0.8rem; 
+    color: #666666 !important; // Color gris legible fijo
+    margin: 5px 0 0 0;
+  } 
+  
+  ion-badge { 
+    border-radius: 10px; 
+  }
+}

@@ -1,29 +1,54 @@
-<app-toolbar nombre="Categorías"></app-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Categorías</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content [fullscreen]="true">
-<ion-list>
-    <ion-item button *ngFor="let categoria of categorias">
-    <ion-avatar slot="start">
-        <img src="https://imgs.search.brave.com/3Jhsahf2HyAWxza0qgVzE-Ct5vzuYoZarE1iCeKplFo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzc3L2I4/LzUyLzc3Yjg1MjBk/ZDBhZDgyYjRkMzQ1/M2FiMmNiZDA3OTM5/LmpwZw" alt="Foto">
-    </ion-avatar>
-    <ion-label class="ion-text-wrap">
-        <h3>{{categoria.nombre}}</h3>
-        <p>{{categoria.descripcion}}</p>
-    </ion-label>
-    <ion-button [routerLink]="['/categoria-detalle', categoria.id_categoria]"color="verde">
-  <ion-icon name="person-circle"></ion-icon>
-</ion-button>
-<ion-button (click)="editar(categoria.id_categoria)" color="warning">
-  <ion-icon name="pencil"></ion-icon>
-</ion-button>
-<ion-button (click)="alertEliminar(categoria.id_categoria)" color="danger">
-  <ion-icon name="trash"></ion-icon>
-</ion-button>
-    </ion-item>
-</ion-list>
-</ion-content>
-<ion-fab slot="fixed" vertical="bottom" horizontal="center">
-    <ion-fab-button (click)="new()">
-        <ion-icon name="add"></ion-icon>
+<ion-content class="ion-padding category-content">
+
+  <div class="empty-state" *ngIf="categorias.length === 0">
+    <ion-icon name="pricetags-outline"></ion-icon>
+    <h3>Sin Categorías</h3>
+    <p>Crea clasificaciones para organizar mejor tus tareas.</p>
+  </div>
+
+  <ion-list class="category-list" *ngIf="categorias.length > 0">
+    
+    <ion-item-sliding *ngFor="let categoria of categorias" class="category-sliding-item">
+      
+      <ion-item lines="none" class="category-item">
+        <div class="icon-wrapper" slot="start">
+          <ion-icon name="pricetag" color="tertiary"></ion-icon>
+        </div>
+       <ion-label>
+  <h2 class="category-title">{{ categoria.nombre }}</h2>
+  <p class="category-description">{{ categoria.descripcion }}</p>
+</ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        
+        <ion-item-option color="warning" (click)="editar(categoria.id_categoria)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-item-option>
+        
+        <ion-item-option color="danger" (click)="alertEliminar(categoria.id_categoria, categoria.nombre)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="new()">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-</ion-fab>
+  </ion-fab>
+
+</ion-content>

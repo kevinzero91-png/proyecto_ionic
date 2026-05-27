@@ -1,0 +1,50 @@
+<ion-content class="login-content">
+  <div class="login-container">
+    
+    <div class="brand-header">
+      <div class="logo-wrapper">
+        <ion-icon name="layers-outline" class="brand-logo"></ion-icon>
+      </div>
+      <h1>Task<span>Flow</span></h1>
+      <p>Gestión de Proyectos y Equipos</p>
+    </div>
+
+    <ion-card class="modern-card">
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="procesarFormulario()">
+          
+          <div class="input-group">
+            <ion-label position="stacked">Correo o Usuario</ion-label>
+            <ion-input 
+              formControlName="username" 
+              type="text" 
+              placeholder="Ej. usuario@empresa.com"
+              class="clean-input">
+            </ion-input>
+          </div>
+
+          <div class="input-group">
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input 
+              formControlName="password" 
+              type="password" 
+              placeholder="••••••••"
+              class="clean-input">
+            </ion-input>
+          </div>
+
+          <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="primary-btn">
+            Iniciar Sesión
+          </ion-button>
+
+          <div class="toggle-section">
+            <a (click)="irARecuperar()">¿Olvidaste tu contraseña?</a>
+            <p>¿No tienes cuenta? <a (click)="irARegistro()">Regístrate aquí</a></p>
+          </div>
+
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

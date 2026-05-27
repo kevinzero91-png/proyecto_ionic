@@ -1,3 +1,90 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content" type="overlay">
+    
+    <ion-header class="ion-no-border">
+      <ion-toolbar class="menu-header">
+        <div class="brand-container">
+          <div class="logo-wrapper">
+            <ion-icon name="layers-outline"></ion-icon>
+          </div>
+          <div class="brand-text">
+            <h2>Task<span>Flow</span></h2>
+            <p>Gestión de Proyectos</p>
+          </div>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="menu-content">
+      
+      <div class="user-profile">
+        <ion-avatar>
+          <img [src]="usuarioActivo.foto_perfil && usuarioActivo.foto_perfil !== 'avatar.png' ? 'http://localhost:8080/uploads/avatars/' + usuarioActivo.foto_perfil : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="Avatar">
+        </ion-avatar>
+        <div class="user-info">
+          <h3>{{ usuarioActivo.nombre }}</h3>
+          <p>{{ usuarioActivo.email }}</p>
+        </div>
+      </div>
+
+      <ion-list lines="none" class="menu-list">
+        
+        <div class="menu-label">PRINCIPAL</div>
+        
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/inicio" routerDirection="root" routerLinkActive="selected" class="menu-item">
+            <ion-icon slot="start" name="grid-outline"></ion-icon>
+            <ion-label>Dashboard</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/proyecto-lista" routerDirection="root" routerLinkActive="selected" class="menu-item">
+            <ion-icon slot="start" name="folder-open-outline"></ion-icon>
+            <ion-label>Proyectos</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/tarea-lista/1" routerDirection="root" routerLinkActive="selected" class="menu-item">
+            <ion-icon slot="start" name="checkmark-done-circle-outline"></ion-icon>
+            <ion-label>Tareas</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/categoria-lista" routerDirection="root" routerLinkActive="selected" class="menu-item">
+            <ion-icon slot="start" name="pricetags-outline"></ion-icon>
+            <ion-label>Categorías</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <div class="menu-label" style="margin-top: 25px;">CONFIGURACIÓN</div>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/perfil" routerDirection="root" routerLinkActive="selected" class="menu-item">
+            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            <ion-label>Mi Perfil</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/configuracion" routerDirection="root" routerLinkActive="selected" class="menu-item">
+            <ion-icon slot="start" name="settings-outline"></ion-icon>
+            <ion-label>Ajustes</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item button (click)="cerrarSesion()" class="menu-item logout-item">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-label>Cerrar Sesión</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

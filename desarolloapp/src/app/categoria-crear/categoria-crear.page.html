@@ -1,31 +1,56 @@
-<ion-header>
-    <ion-toolbar color="personalizado">
-        <ion-title class="ion-text-center">Nueva Categoria</ion-title>
-    </ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button (click)="modalCtrl.dismiss()">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-title>{{ id_categoria ? 'Editar Categoría' : 'Nueva Categoría' }}</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <form [formGroup]="categoria" (ngSubmit)="guardarDatos()">
-        <ion-grid>
-            <ion-row>
-                <ion-col size="12">
-                    <ion-item>
-                        <ion-label position="floating" color="primary">Nombre</ion-label>
-                        <ion-input type="text" formControlName="nombre" class="form-control"></ion-input>
-                    </ion-item>
-                    <div id="note" *ngFor="let validation of mensajes_validacion.nombre">
-                        <ion-note color="danger" *ngIf="getError('nombre')[(validation.type)]">
-                            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-                        </ion-note>
-                    </div>
-                </ion-col>
-                    
-                <ion-col size="12">
-                    <p class="ion-text-center">
-                        <ion-button type="submit" [disabled]="!categoria.valid">Guardar</ion-button>
-                    </p>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </form>
+<ion-content class="ion-padding form-content">
+  
+  <div class="form-header">
+    <h2>Información de la Categoría</h2>
+    <p>Asigna un nombre descriptivo para clasificar tus tareas.</p>
+  </div>
+
+  <ion-card class="form-card">
+    <ion-card-content>
+      
+      <form [formGroup]="categoria" (ngSubmit)="guardarDatos()">
+        
+        <div class="input-group">
+          <ion-label position="stacked" class="custom-label">Nombre de la Categoría <span class="required">*</span></ion-label>
+          <ion-input 
+            formControlName="nombre" 
+            placeholder="Ej. Diseño, Desarrollo, Marketing..." 
+            clearInput="true"
+            class="custom-input">
+          </ion-input>
+
+          <ng-container *ngFor="let msg of mensajes_validacion.nombre">
+            <div class="error-message" *ngIf="categoria.get('nombre')?.hasError(msg.type) && (categoria.get('nombre')?.dirty || categoria.get('nombre')?.touched)">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              {{ msg.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="action-container">
+          <ion-button 
+    expand="block" 
+    size="large" 
+    color="tertiary" 
+    type="submit" 
+    [disabled]="!categoria.valid"> Guardar Categoría
+</ion-button>
+        </div>
+
+      </form>
+      </ion-card-content>
+  </ion-card>
+
 </ion-content>

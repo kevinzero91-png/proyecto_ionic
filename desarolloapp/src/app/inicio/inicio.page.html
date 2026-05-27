@@ -1,0 +1,86 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding dashboard-content">
+
+ <div class="welcome-section">
+  <h1 class="greeting">Hola, {{ nombreUsuario }} 👋</h1>
+  <p class="subtitle">Aquí tienes el resumen de tu trabajo de hoy.</p>
+</div>
+
+  <ion-grid class="metrics-grid ion-no-padding">
+    <ion-row>
+      
+      <ion-col size="6">
+        <ion-card class="metric-card card-primary">
+          <ion-card-content>
+            <div class="icon-container">
+              <ion-icon name="folder-open"></ion-icon>
+            </div>
+            <h2 class="metric-number">{{ totalProyectos }}</h2>
+            <p class="metric-label">Proyectos</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-card class="metric-card card-warning">
+          <ion-card-content>
+            <div class="icon-container">
+              <ion-icon name="time"></ion-icon>
+            </div>
+            <h2 class="metric-number">{{ tareasActivas }}</h2>
+            <p class="metric-label">Tareas Activas</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="metric-card card-success horizontal-card">
+          <ion-card-content>
+            <div class="flex-container">
+              <div class="icon-container-large">
+                <ion-icon name="checkmark-done-circle"></ion-icon>
+              </div>
+              <div class="text-container">
+                <h2 class="metric-number">{{ tareasCompletadas }}</h2>
+                <p class="metric-label">Tareas completadas este mes</p>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="section-title">
+    <h3>Actividad Reciente</h3>
+  </div>
+
+  <ion-list class="recent-list">
+    <ion-item lines="none" class="recent-item" *ngFor="let tarea of actividadReciente">
+      <ion-icon slot="start" name="document-text" color="tertiary"></ion-icon>
+      <ion-label>
+        <h2>{{ tarea.titulo }}</h2>
+        <p>Actualización reciente</p>
+      </ion-label>
+      <ion-badge [color]="obtenerColorEstado(tarea.id_estado)">
+        {{ obtenerNombreEstado(tarea.id_estado) }}
+      </ion-badge>
+    </ion-item>
+    
+    <ion-item lines="none" class="recent-item" *ngIf="actividadReciente.length === 0">
+      <ion-label class="ion-text-center">No hay actividad reciente.</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

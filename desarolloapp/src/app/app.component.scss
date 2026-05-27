@@ -1,16 +1,80 @@
-@font-face {
-    font-family: 'Betania Patmos';
-    src: url("../assets/fonts/fuente.ttf"); //change url accordingly
+ion-menu {
+  --background: var(--ion-background-color); // Se adapta solo
 }
 
-:root {
-    --ion-font-family: 'Betania Patmos';
+.menu-header {
+  --background: var(--ion-background-color);
+  padding: 10px 5px;
+
+  .logo-wrapper {
+    background: var(--ion-color-primary); // Usa el azul de tu app
+    color: white;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; justify-content: center; align-items: center;
+  }
+
+  .brand-text h2 {
+    color: var(--ion-text-color);
+    span { color: var(--ion-color-primary); }
+  }
 }
-.ion-color-verde {
-   --ion-color-base: #00ebe7;
-	--ion-color-base-rgb: 0,235,231;
-	--ion-color-contrast: #000000;
-	--ion-color-contrast-rgb: 0,0,0;
-	--ion-color-shade: #00cfcb;
-	--ion-color-tint: #1aede9;
+
+// 2. Perfil de Usuario (Versión Compacta)
+.user-profile {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px; // Menos relleno para que no se sienta gigante
+  margin: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  gap: 12px; // Espaciado moderno entre avatar y texto
+
+  ion-avatar {
+    width: 40px;  // Tamaño estándar de menú
+    height: 40px;
+    flex-shrink: 0; // Evita que la imagen se deforme o se encoja
+  }
+
+  .user-info {
+    overflow: hidden; // Vital: evita que el texto largo rompa el diseño
+    
+    h3 { 
+      margin: 0; 
+      color: var(--ion-text-color); 
+      font-size: 14px; // Ajustado
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; // Si el nombre es muy largo, pone "..."
+    }
+    
+    p { 
+      margin: 2px 0 0 0; 
+      color: var(--ion-color-medium); 
+      font-size: 11px; // Un poco más pequeño para que no compita con el nombre
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.menu-item {
+  --background: transparent;
+  --color: var(--ion-text-color); // Se adapta solo
+  
+  &.selected {
+    --background: var(--ion-color-primary-contrast); // Fondo azul
+    --color: var(--ion-color-primary); // Texto azul
+    font-weight: bold;
+    ion-icon { color: var(--ion-color-primary); }
+  }
+
+  ion-icon { color: var(--ion-color-medium); }
+}
+
+.logout-item {
+  --color: var(--ion-color-danger);
+  ion-icon { color: var(--ion-color-danger); }
 }

@@ -52,6 +52,12 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'POST auth/login' => 'auth/login',
+                'POST auth/register' => 'auth/register',
+                'POST auth/recover' => 'auth/recover',
+                'POST auth/reset-password' => 'auth/reset-password',
+                'POST auth/upload-avatar' => 'auth/upload-avatar',
+                'POST,OPTIONS auth/update-profile' => 'auth/update-profile',
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'archivo'],      
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'categoria'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'comentario'],
